@@ -1,1 +1,5 @@
 modelsim/work
+modelsim/wlft*
+modelsim/transcript
+modelsim/vsim.wlf
+modelsim/bench.vcd

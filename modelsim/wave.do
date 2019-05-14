@@ -1,18 +1,34 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /top_tb/clk_in
-add wave -noupdate /top_tb/rst
-add wave -noupdate /top_tb/enable
-add wave -noupdate /top_tb/go
-add wave -noupdate /top_tb/last_clk
-add wave -noupdate /top_tb/divider
-add wave -noupdate /top_tb/clk_out
-add wave -noupdate /top_tb/pos_edge
-add wave -noupdate /top_tb/neg_edge
+add wave -noupdate /tb_spi_top/i_spi_top/shift/Tp
+add wave -noupdate /tb_spi_top/i_spi_top/shift/clk
+add wave -noupdate /tb_spi_top/i_spi_top/shift/rst
+add wave -noupdate /tb_spi_top/i_spi_top/shift/latch
+add wave -noupdate /tb_spi_top/i_spi_top/shift/byte_sel
+add wave -noupdate /tb_spi_top/i_spi_top/shift/len
+add wave -noupdate /tb_spi_top/i_spi_top/shift/lsb
+add wave -noupdate /tb_spi_top/i_spi_top/shift/go
+add wave -noupdate /tb_spi_top/i_spi_top/shift/pos_edge
+add wave -noupdate /tb_spi_top/i_spi_top/shift/neg_edge
+add wave -noupdate /tb_spi_top/i_spi_top/shift/rx_negedge
+add wave -noupdate /tb_spi_top/i_spi_top/shift/tx_negedge
+add wave -noupdate /tb_spi_top/i_spi_top/shift/tip
+add wave -noupdate /tb_spi_top/i_spi_top/shift/last
+add wave -noupdate /tb_spi_top/i_spi_top/shift/p_in
+add wave -noupdate /tb_spi_top/i_spi_top/shift/p_out
+add wave -noupdate /tb_spi_top/i_spi_top/shift/s_clk
+add wave -noupdate /tb_spi_top/i_spi_top/shift/s_in
+add wave -noupdate /tb_spi_top/i_spi_top/shift/s_out
+add wave -noupdate /tb_spi_top/i_spi_top/shift/cnt
+add wave -noupdate /tb_spi_top/i_spi_top/shift/data
+add wave -noupdate /tb_spi_top/i_spi_top/shift/tx_bit_pos
+add wave -noupdate /tb_spi_top/i_spi_top/shift/rx_bit_pos
+add wave -noupdate /tb_spi_top/i_spi_top/shift/rx_clk
+add wave -noupdate /tb_spi_top/i_spi_top/shift/tx_clk
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {109832050 ps} 0} {{Cursor 2} {109850410 ps} 0}
-quietly wave cursor active 2
-configure wave -namecolwidth 150
+WaveRestoreCursors {{Cursor 1} {157 ns} 0}
+quietly wave cursor active 1
+configure wave -namecolwidth 387
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -24,6 +40,6 @@ configure wave -gridoffset 0
 configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
-configure wave -timelineunits ps
+configure wave -timelineunits ns
 update
-WaveRestoreZoom {109797260 ps} {110021200 ps}
+WaveRestoreZoom {0 ns} {854 ns}

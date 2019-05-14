@@ -1,0 +1,6 @@
+../tb/tb_spi_top.v
+../tb/spi_slave_model.v
+../tb/wb_master_model.v
+../spi_clgen.v
+../spi_shift.v
+../spi_top.v

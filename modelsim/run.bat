@@ -1,1 +1,1 @@
-modelsim -do sim.do
+modelsim -do top_sim.do

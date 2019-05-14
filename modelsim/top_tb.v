@@ -33,14 +33,16 @@ initial begin
         go  = 1'b1;
         divider = 8'd4;
     #20 rst = 1'b0;
-    #500 last_clk = 1'b1;
-    #50  last_clk = 1'b0;
-    #50  divider = 8'd1;
-    #500 divider = 8'd2;
-    #500 divider = 8'd3;
-    #500 divider = 8'd4;
-    #500 divider = 8'd5;
-    #500 enable = 1'b0;
+    #10  divider = 8'd8;
+    #1000 divider = 8'd3;
+    #1000 divider = 8'd4;
+    #1000 divider = 8'd5;
+    #1000 divider = 8'd1;
+    #1000 divider = 8'd7;
+    #1000 divider = 8'd2;
+    #1000 divider = 8'd4;
+    #1000 divider = 8'd0;
+   // #500 enable = 1'b0;
 end
 
 always #1 clk_in = ~clk_in;
