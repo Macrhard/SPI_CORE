@@ -1,44 +1,3 @@
-//////////////////////////////////////////////////////////////////////
-////                                                              ////
-////  spi_top.v                                                   ////
-////                                                              ////
-////  This file is part of the SPI IP core project                ////
-////  http://www.opencores.org/projects/spi/                      ////
-////                                                              ////
-////  Author(s):                                                  ////
-////      - Simon Srot (simons@opencores.org)                     ////
-////                                                              ////
-////  All additional information is avaliable in the Readme.txt   ////
-////  file.                                                       ////
-////                                                              ////
-//////////////////////////////////////////////////////////////////////
-////                                                              ////
-//// Copyright (C) 2002 Authors                                   ////
-////                                                              ////
-//// This source file may be used and distributed without         ////
-//// restriction provided that this copyright statement is not    ////
-//// removed from the file and that any derivative work contains  ////
-//// the original copyright notice and the associated disclaimer. ////
-////                                                              ////
-//// This source file is free software; you can redistribute it   ////
-//// and/or modify it under the terms of the GNU Lesser General   ////
-//// Public License as published by the Free Software Foundation; ////
-//// either version 2.1 of the License, or (at your option) any   ////
-//// later version.                                               ////
-////                                                              ////
-//// This source is distributed in the hope that it will be       ////
-//// useful, but WITHOUT ANY WARRANTY; without even the implied   ////
-//// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR      ////
-//// PURPOSE.  See the GNU Lesser General Public License for more ////
-//// details.                                                     ////
-////                                                              ////
-//// You should have received a copy of the GNU Lesser General    ////
-//// Public License along with this source; if not, download it   ////
-//// from http://www.opencores.org/lgpl.shtml                     ////
-////                                                              ////
-//////////////////////////////////////////////////////////////////////
-
-
 `include "spi_defines.v"
 `include "timescale.v"
 
@@ -52,14 +11,14 @@ module spi_top
   ss_pad_o, sclk_pad_o, mosi_pad_o, miso_pad_i
 );
 
-  parameter Tp = 1;
+  parameter Tp = `TP;
 
   // Wishbone signals
   input                            wb_clk_i;         // master clock input
   input                            wb_rst_i;         // synchronous active high reset
   input                      [4:0] wb_adr_i;         // lower address bits
   input                   [32-1:0] wb_dat_i;         // databus input
-  output                  [32-1:0] wb_dat_o;         // databus output
+  output                  [32-1:0] wb_dat_o;         // databus output  to soc
   input                      [3:0] wb_sel_i;         // byte select inputs
   input                            wb_we_i;          // write enable input
   input                            wb_stb_i;         // stobe/core select signal
@@ -82,7 +41,7 @@ module spi_top
   reg       [`SPI_DIVIDER_LEN-1:0] divider;          // Divider register
   reg       [`SPI_CTRL_BIT_NB-1:0] ctrl;             // Control and status register
   reg             [`SPI_SS_NB-1:0] ss;               // Slave select register
-  reg                     [32-1:0] wb_dat;           // wb data out
+  reg                     [32-1:0] wb_dat;           // wb data out  rx data to soc
   wire         [`SPI_MAX_CHAR-1:0] rx;               // Rx register
   wire                             rx_negedge;       // miso is sampled on negative edge
   wire                             tx_negedge;       // mosi is driven on negative edge
