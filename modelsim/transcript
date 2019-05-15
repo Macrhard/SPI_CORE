@@ -18,7 +18,7 @@
 # vmap work work 
 # Modifying modelsim.ini
 # Model Technology ModelSim SE-64 vlog 10.6d Compiler 2018.02 Feb 24 2018
-# Start time: 21:41:41 on May 14,2019
+# Start time: 21:07:10 on May 15,2019
 # vlog -reportprogress 300 "+incdir+C:/dev/rtl/spi" -f top_sim_filelist 
 # -- Compiling module tb_spi_top
 # -- Compiling module spi_slave_model
@@ -29,10 +29,10 @@
 # 
 # Top level modules:
 # 	tb_spi_top
-# End time: 21:41:41 on May 14,2019, Elapsed time: 0:00:00
+# End time: 21:07:10 on May 15,2019, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -novopt work.tb_spi_top 
-# Start time: 21:41:41 on May 14,2019
+# Start time: 21:07:10 on May 15,2019
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # Refreshing C:/dev/rtl/spi/modelsim/work.tb_spi_top
 # Loading work.tb_spi_top
@@ -53,7 +53,22 @@
 # status:                  195 done reset
 # status:                  286 programmed registers
 # status:                  366 verified registers
-# status:                  386 generate transfer:  24 bit, msb first, tx posedge, rx negedge
-# status:                 1426 transfer completed: not ok
-# End time: 21:42:33 on May 14,2019, Elapsed time: 0:00:52
-# Errors: 0, Warnings: 1
+# status:                  386 generate transfer:  8 bit, msb first, tx posedge, rx negedge
+# status:                  616 transfer completed: ok
+# status:                  676 generate transfer:  8 bit, msb first, tx negedge, rx posedge
+# status:                  906 transfer completed: ok
+# status:                  966 generate transfer: 16 bit, lsb first, tx negedge, rx posedge
+# status:                 1346 transfer completed: ok
+# status:                 1426 generate transfer: 64 bit, lsb first, tx posedge, rx negedge
+# status:                 2796 transfer completed: ok
+# status:                 2916 generate transfer: 128 bit, msb first, tx posedge, rx negedge
+# status:                 5636 transfer completed: ok
+# status:                 5696 generate transfer: 32 bit, msb first, tx negedge, rx posedge, ie
+# status:                 6395 transfer completed: ok
+# status:                 6456 generate transfer: 32 bit, msb first, tx posedge, rx negedge, ie, ass
+# status:                 7155 transfer completed: not ok
+# status:                 7216 generate transfer: 1 bit, msb first, tx posedge, rx negedge, ie, ass
+# status:                 7295 transfer completed: ok
+# 
+# 
+# status:                 7295 Testbench done

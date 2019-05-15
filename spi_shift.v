@@ -49,6 +49,7 @@ module spi_shift (clk, rst, latch, byte_sel, len, lsb, go,
   assign tx_clk = (tx_negedge ? neg_edge : pos_edge) && !last;
   
   // Character bit counter
+  //cnt 从设定的要发送的bit个数递减
   always @(posedge clk or posedge rst)
   begin
     if(rst)

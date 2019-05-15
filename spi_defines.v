@@ -116,4 +116,5 @@
 `define SPI_CTRL_RES_1          7
 `define SPI_CTRL_CHAR_LEN       6:0
 
+//delay parameter
 `define TP                      0

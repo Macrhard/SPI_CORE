@@ -42,23 +42,47 @@ module tb_spi_top();
 
   // Wishbone master model
   wb_master_model #(32, 32) i_wb_master (
-    .clk(clk), .rst(rst),
-    .adr(adr), .din(dat_i), .dout(dat_o),
-    .cyc(cyc), .stb(stb), .we(we), .sel(sel), .ack(ack), .err(err), .rty(1'b0)
+    .clk          (clk), 
+    .rst          (rst),
+    .adr          (adr), 
+    .din          (dat_i), 
+    .dout         (dat_o),
+    .cyc          (cyc), 
+    .stb          (stb), 
+    .we           (we), 
+    .sel          (sel), 
+    .ack          (ack), 
+    .err          (err), 
+    .rty          (1'b0)
   );
 
   // SPI master core
   spi_top i_spi_top (
-    .wb_clk_i(clk), .wb_rst_i(rst), 
-    .wb_adr_i(adr[4:0]), .wb_dat_i(dat_o), .wb_dat_o(dat_i), 
-    .wb_sel_i(sel), .wb_we_i(we), .wb_stb_i(stb), 
-    .wb_cyc_i(cyc), .wb_ack_o(ack), .wb_err_o(err), .wb_int_o(int),
-    .ss_pad_o(ss), .sclk_pad_o(sclk), .mosi_pad_o(mosi), .miso_pad_i(miso) 
+    .i_clk        (clk), 
+    .i_rst        (rst), 
+    .i_adr        (adr[4:0]), 
+    .i_dat        (dat_o), 
+    .o_dat        (dat_i), 
+    .i_sel        (sel), 
+    .i_we         (we), 
+    .i_stb        (stb), 
+    .i_cyc        (cyc), 
+    .o_ack        (ack), 
+    .o_err        (err), 
+    .o_intrup     (int),
+    .o_pad_ss     (ss), 
+    .o_pad_sclk   (sclk), 
+    .o_pad_mosi   (mosi), 
+    .i_pad_miso   (miso) 
   );
 
   // SPI slave model
   spi_slave_model i_spi_slave (
-    .rst(rst), .ss(ss[0]), .sclk(sclk), .mosi(mosi), .miso(miso)
+    .rst          (rst), 
+    .ss           (ss[0]), 
+    .sclk         (sclk), 
+    .mosi         (mosi), 
+    .miso         (miso)
   );
 
   initial
@@ -97,25 +121,25 @@ module tb_spi_top();
     /////////////////////
       
       //配置寄存器
-      i_wb_master.wb_write(0, SPI_DIVIDE, 32'h01); // set devider register
-      i_wb_master.wb_write(0, SPI_TX_0, 32'h800950);   // set tx register to 0x5a
-      i_wb_master.wb_write(0, SPI_CTRL, 32'h218);   // set 24 bit transfer
+      i_wb_master.wb_write(0, SPI_DIVIDE, 32'h00); // set devider register
+      i_wb_master.wb_write(0, SPI_TX_0, 32'h5a);   // set tx register to 0x5a
+      i_wb_master.wb_write(0, SPI_CTRL, 32'h208);   // set 8 bit transfer
       i_wb_master.wb_write(0, SPI_SS, 32'h01);     // set ss 0
       $display("status: %t programmed registers", $time);
       
       //校验寄存器
-      i_wb_master.wb_cmp(0, SPI_DIVIDE, 32'h03);   // verify devider register
-      i_wb_master.wb_cmp(0, SPI_TX_0, 32'h800950);     // verify tx register
-      i_wb_master.wb_cmp(0, SPI_CTRL, 32'h218);     // verify tx register
+      i_wb_master.wb_cmp(0, SPI_DIVIDE, 32'h00);   // verify devider register
+      i_wb_master.wb_cmp(0, SPI_TX_0, 32'h5a);     // verify tx register
+      i_wb_master.wb_cmp(0, SPI_CTRL, 32'h208);     // verify tx register
       i_wb_master.wb_cmp(0, SPI_SS, 32'h01);       // verify ss register
       $display("status: %t verified registers", $time);
 
-      //读取MISO
+      //配置slave模块
       i_spi_slave.rx_negedge = 1'b1;
       i_spi_slave.tx_negedge = 1'b0;
-      i_spi_slave.data[31:0] = 32'h5a;
-      i_wb_master.wb_write(0, SPI_CTRL, 32'h318);   // set 24 bit transfer, start transfer
-      $display("status: %t generate transfer:  24 bit, msb first, tx posedge, rx negedge", $time);
+      i_spi_slave.data[31:0] = 32'ha5967e5a;
+      i_wb_master.wb_write(0, SPI_CTRL, 32'h308);   // set 24 bit transfer, start transfer
+      $display("status: %t generate transfer:  8 bit, msb first, tx posedge, rx negedge", $time);
 
       // Check bsy bit
       i_wb_master.wb_read(0, SPI_CTRL, q);
@@ -303,6 +327,4 @@ module tb_spi_top();
       $stop;
     end
 
-endmodule
-
-
+endmodule 

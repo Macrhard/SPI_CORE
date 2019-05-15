@@ -1,3 +1,70 @@
-git commit -m "first commit"
-git remote add origin git@github.com:Macrhard/SPI_CORE.git
-git push -u origin master
+CTRL_GO:
+
+> 置“1”，表示传输开始，传输过程中该位一直保持高电平，传输结束后自动清零。对此位写“0”无效。
+>
+> 注意：所有寄存器，包括CTRL寄存器的其他位，都要在GO置“1”前，完成赋值配置。当传输完GO被清零后，需要重新配置CTRL寄存器。在传输过程中，所有寄存器都不能被写入。
+>
+> 所以go信号需要单独写。
+
+
+
+
+
+
+
+### 重要信号
+
+wb_we_i
+
+> 写使能信号
+
+wb_stb_i
+
+> 从机选通信号（通信建立信号），该信号有效时（置“1”），slave才响应其他master信号，同时返回ack，err，int信号。
+
+wb_cyc_i
+
+> 总线周期有效信号，当读写操作时有效
+
+wb_sel_i
+
+> 字节选择信号
+
+
+
+### 配置步骤
+
+adr 地址配入
+
+dout 数据配入
+
+cyc 置“1” 有效
+
+stb 置“1”有效
+
+we 置“1”有效
+
+sel 写入4’b1111
+
+cyc 清零完成一个周期传输
+
+
+
+### CS信号
+
+```verilog
+assign ss_pad_o = ~((ss & {`SPI_SS_NB{tip & ass}}) | (ss & {`SPI_SS_NB{!ass}}));
+//由上面代码可看出，cs信号，必须需要指定对应线的ss寄存器的值。ass信号非必须的。当ass置“1”有效时，效果是，即使tip信号拉低，即本次传输结束，cs信号仍会拉低。所以如果想要每次传输结束后立即拉高cs线，必须对ass进行配置。使其为“1”.
+```
+
+
+
+### 仿真环境
+
+> ModelSim (version <= 10.6)
+
+在cmd命令行提示符下执行run.bat文件即可。
+
+top_sim.do文件是建立仿真环境
+
+wave.do文件是添加指定信号到wave
